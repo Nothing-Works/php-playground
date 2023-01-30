@@ -20,10 +20,13 @@
     <h1>
         <?php
             $name = "andy";
-
-            echo "Hello $name";
+            $greeting = "Hello";
+            echo "$greeting $name !";
+            $text = "This is a long paragraph and this is for the homework";
         ?>
     </h1>
+    <p><?= $text ?></p>
+    <p><?php echo $text ?></p>
     <?php
         $book = "Dark Matter";
         $read = false;
@@ -42,10 +45,40 @@
     <h2>Recommended Books</h2>
     <?php
         $books = ['Do Androids Dream of Electric Sheep', 'The Langoliers','Hail Mary'];
+        $booksWithDetails = [
+                [
+                    'name' => 'Do Androids Dream of Electric Sheep',
+                    'author' => 'Philip K. Dick',
+                    'purchaseUrl' => 'https://example.com',
+                    'releaseYear' => 2005
+                ],
+                [
+                    'name' => 'The Langoliers',
+                    'author' => 'Andy Song',
+                    'purchaseUrl' => 'https://example.com',
+                    'releaseYear' => 1968
+                ],
+                [
+                    'name' => 'Project Hail Mary',
+                    'author' => 'Andy Weir',
+                    'purchaseUrl' => 'https://example.com',
+                    'releaseYear' => 2003
+                ]
+        ]
     ?>
     <ul>
         <?php foreach ($books as $book) : ?>
             <li><?= $book ?></li>
+        <?php endforeach; ?>
+    </ul>
+    <p><?= $books[1] ?></p>
+    <ul>
+        <?php foreach ($booksWithDetails as $booksWithDetail) : ?>
+            <li>
+                <a href="<?= $booksWithDetail['purchaseUrl'] ?>">
+                    <?= $booksWithDetail['name'] ?> (<?= $booksWithDetail['releaseYear'] ?>)
+                </a>
+            </li>
         <?php endforeach; ?>
     </ul>
 </body>
