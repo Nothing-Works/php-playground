@@ -53,18 +53,57 @@
                     'releaseYear' => 2005
                 ],
                 [
-                    'name' => 'The Langoliers',
-                    'author' => 'Andy Song',
+                    'name' => 'The Martian',
+                    'author' => 'Andy Weir',
                     'purchaseUrl' => 'https://example.com',
-                    'releaseYear' => 1968
+                    'releaseYear' => 2021
                 ],
                 [
                     'name' => 'Project Hail Mary',
                     'author' => 'Andy Weir',
                     'purchaseUrl' => 'https://example.com',
-                    'releaseYear' => 2003
+                    'releaseYear' => 2011
                 ]
-        ]
+        ];
+
+        function filterByDate(array $books) : array {
+            $newBooks = [];
+            foreach ($books as $book)
+            {
+                if ($book['releaseYear'] >= 2000)
+                {
+                    $newBooks[] = $book;
+                }
+            }
+            return $newBooks;
+        }
+
+        // array_filter will do the same thing in this case
+        function filter($items, $fn) : array {
+            $newItems = [];
+            foreach ($items as $item){
+                if ($fn($item))
+                {
+                    $newItems[] = $item;
+                }
+            }
+            return $newItems;
+        }
+
+        function filterByAuthor(array $books, string $author) : array {
+            $newBooks = [];
+            foreach ($books as $book)
+            {
+                if ($book['author'] === $author)
+                {
+                    $newBooks[] = $book;
+                }
+            }
+            return $newBooks;
+        }
+
+        $filteredBooks = filterByAuthor($booksWithDetails, 'Philip K. Dick');
+        $filterFunc = filter($booksWithDetails, fn($book) => $book['releaseYear'] >= 2010);
     ?>
     <ul>
         <?php foreach ($books as $book) : ?>
@@ -73,7 +112,7 @@
     </ul>
     <p><?= $books[1] ?></p>
     <ul>
-        <?php foreach ($booksWithDetails as $booksWithDetail) : ?>
+        <?php foreach ($filterFunc as $booksWithDetail) : ?>
             <li>
                 <a href="<?= $booksWithDetail['purchaseUrl'] ?>">
                     <?= $booksWithDetail['name'] ?> (<?= $booksWithDetail['releaseYear'] ?>)
