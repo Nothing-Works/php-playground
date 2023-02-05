@@ -1,3 +1,5 @@
 <?php
 
-require 'mission.view.php';
+$header = 'Mission';
+
+require 'views/mission.view.php';
