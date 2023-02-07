@@ -1,4 +1,5 @@
 <?php
+require 'functions.php';
 
 $header = 'About Us';
 
